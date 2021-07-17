@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: scroll;
+    }
+
+    input {
+      padding: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: #b0b0b0;
+    }
+
+    .topbar {
+      width: 100%;
+      font-size: 12px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      display: flex;
+      position: relative;
+      background-color: #333;
+    }
+    .topbar 
+
+    .active {
+      color: #ff6700;
+    }
+
+    .wrap {
+      justify-content: space-between;
+      width: 1226px;
+      margin: 0 auto;
+      display: flex;
+      flex-shrink: 0;
+    }
+
+    .topbar .box::after {
+      content: "|";
+      color: #424242;
+      display: block;
+      margin-left: 5px;
+    }
+
+    .left a,
+    .right-left a {
+      color: #b0b0b0;
+    }
+
+    /* .topbar a:hover {
+        color: #ff6700;
+      } */
+    .left {
+      display: flex;
+    }
+
+    .right {
+      position: relative;
+      display: flex;
+    }
+
+    .right-left {
+      position: relative;
+      display: flex;
+    }
+
+    .left div,
+    .right div {
+      margin-right: 5px;
+      /* flex-shrink: 0; */
+      display: flex;
+    }
+
+    .cartMenu {
+      position: relative;
+      display: flex;
+      margin-left: 20px;
+      width: 120px;
+      height: 40px;
+      justify-content: center;
+      background-color: rgb(92, 92, 92);
+      transition: all 0.3s;
+      /* box-shadow: 0 2px 10px rgb(0 0 0 / 15%); */
+      z-index: 9;
+    }
+
+    .cartbox {
+      cursor: pointer;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .content {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      right: 10px;
+      width: 350px;
+      margin-top: 40px;
+      /* height: 120px; */
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgb(0 0 0 / 15%);
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .loading {
+      position: relative;
+      width: 4px;
+      height: 8px;
+      background-color: #ff6700;
+      animation-name: up-down;
+      animation-duration: .5s;
+      animation-iteration-count: infinite;
+    }
+
+    .loading::after,
+    .loading::before {
+      content: "";
+      position: absolute;
+      top: 2px;
+      width: 4px;
+      height: 8px;
+      background-color: #ff6700;
+      animation-name: up-down2;
+      animation-duration: .4s;
+      animation-iteration-count: infinite;
+    }
+
+    .loading::before {
+      left: 6px;
+      animation-delay: .2s;
+    }
+
+    .loading::after {
+      right: 6px;
+      animation-delay: .2s;
+    }
+
+
+    .under-bar {
+      display: flex;
+      justify-content: space-between;
+      width: 1226px;
+      margin: 20px auto;
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .logo-wrap {
+      width: 55px;
+      height: 55px;
+    }
+
+    .mid-nav {
+      width: 600px;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      font-size: 16px;
+      height: 55px;
+      line-height: 55px;
+    }
+
+    .mid-nav a {
+      color: #222;
+    }
+
+    .searching {
+      width: 296px;
+      height: 55px;
+      position: relative;
+    }
+
+    .search-box {
+      width: 232px;
+      height: 55px;
+      font-size: 16px;
+      padding-left: 8px;
+      border: 1px solid #444;
+      box-sizing: border-box;
+    }
+
+    .search-icon {
+      width: 52px;
+      height: 53px;
+      position: relative;
+      right: 6px;
+      top: -1px;
+      border: 1px solid black;
+      border-radius: 0px;
+      box-sizing: content-box;
+    }
+    .under-nav-list{
+      overflow: hidden;
+      transition: all 0.3s;
+      position: absolute;
+      left: 0;
+      top: 140px;
+      width: 100%;
+      background-color: #eee;
+      box-shadow: 0 2px 10px #ddd;
+    }
+    .under-wrap{
+      width: 1226px;
+      margin: 0 auto;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .listed{
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      flex:1;
+    }
+    .list-item{
+      position: relative;
+    }
+    .list-item::after{
+      content:"";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 60px;
+      width: 120px;
+      height: 120px;
+      border-right: 1px solid #ccc;
+    }
+
+
+    @keyframes up-down {
+      from {
+        height: 12px;
+        background-color: #ff6700;
+      }
+
+      to {
+        height: 8px;
+        background-color: #ff9f5f;
+      }
+    }
+
+    @keyframes up-down2 {
+      from {
+        height: 8px;
+        background-color: #ff6700;
+      }
+
+      to {
+        height: 5px;
+        background-color: #ff9f5f;
+      }
+    }
+
+    .hide {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="topbar">
+      <div class="wrap">
+        <div class="left">
+          <div class="box"><a href="#">小米商城</a></div>
+          <div class="box"><a href="#">MIUI</a></div>
+          <div class="box"><a href="#">loT</a></div>
+          <div class="box"><a href="#">云服务</a></div>
+          <div class="box"><a href="#">天星数科</a></div>
+          <div class="box"><a href="#">有品</a></div>
+          <div class="box"><a href="#">小爱开放平台</a></div>
+          <div class="box"><a href="#">企业团购</a></div>
+          <div class="box"><a href="#">资质证照</a></div>
+          <div class="box"><a href="#">协议规则</a></div>
+          <div class="box"><a href="#">下载app</a></div>
+          <div class="box"><a href="#">智能生活</a></div>
+          <div><a href="#">Seletion Location</a></div>
+        </div>
+        <div class="right">
+          <div class="right-left">
+            <div class="login box"><a href="#">登录</a></div>
+            <div class="box"><a href="#">注册</a></div>
+            <div><a href="#">消息通知</a></div>
+          </div>
+          <div class="cart-wrap">
+            <div class="cartMenu">
+              <a href="#" class="cartbox">
+                <em class="icon-font cart"></em>
+                <span class="cartbox-text">购物车</span>
+                <span>(0)</span>
+              </a>
+            </div>
+            <nav style="height: 0px;" class="content">
+              <nav class="loading"></nav>
+              <span class="content-text hide">您没有加入任何商品到购物车哦~</span>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="under-bar">
+      <div class="logo">
+        <div class="logo-wrap">
+          <img src="https://s02.mifile.cn/assets/static/image/logo-mi2.png" alt="小米logo">
+        </div>
+      </div>
+      <div class="mid-nav">
+        <div><a class="mid-nav-item1" href="#">小米手机</a></div>
+        <div><a class="mid-nav-item2" href="#">Redmi红米</a></div>
+        <div><a class="mid-nav-item3" href="#">电视</a></div>
+        <div><a class="mid-nav-item4" href="#">笔记本</a></div>
+        <div><a class="mid-nav-item5" href="#">家电</a></div>
+        <div><a class="mid-nav-item6" href="#">路由器</a></div>
+        <div><a class="mid-nav-item7" href="#">智能硬件</a></div>
+        <div><a href="#">服务</a></div>
+        <div><a href="#">社区</a></div>
+      </div>
+      <div class="searching">
+        <form action="">
+          <input type="text" class="search-box" placeholder="小米手机">
+          <input type="submit" value="" class="search-icon"></input>
+        </form>
+      </div>
+      <div class="under-nav-list" style="height: 200px;">
+        <div class="under-wrap">
+          <div class="list1 listed">
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/85e44ea2405ff8414148bbde7446b137.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/1a359e9346e3c6ee8c9d8389e3fd9458.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/a1c45eadcedeb27b1cafca0359422da9.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/56e3379b5422cb06e5c8a0c546445606.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/f9149ef3ba2c9025a4a21c98ae793808.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item-end"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/963679eaf3937351e154600ab3448460.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+          </div>
+          <div class="list2 listed hide">
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item-end"><img src="" alt=""></div>
+          </div>
+          <div class="list3 listed hide">
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item-end"><img src="" alt=""></div>
+          </div>
+          <div class="list4 listed hide">
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item-end"><img src="" alt=""></div>
+          </div>
+          <div class="list5 listed hide">
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item-end"><img src="" alt=""></div>
+          </div>
+          <div class="list6 listed hide">
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item-end"><img src="" alt=""></div>
+          </div>
+          <div class="list7 listed hide">
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item"><img src="" alt=""></div>
+            <div class="list-item-end"><img src="" alt=""></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <section>
+    <div class="menu">
+      <div class="menu-list">
+        
+      </div>
+      <div class="menu-lbt">
+
+      </div>
+    </div>
+  </section>
+
+
+
+  <script>
+    (function () {
+      let cartWrap = document.querySelector('.cart-wrap')
+      let cartMenu = cartWrap.querySelector('.cartMenu')
+      let cartbox = cartMenu.querySelector('.cartbox')
+      let content = cartWrap.querySelector('.content')
+      let loading = content.querySelector('.loading')
+      let contentText = content.querySelector('.content-text')
+      let midNav = document.querySelector('.mid-nav')
+      let underNavList = document.querySelector('.under-nav-list')
+      let list1 = underNavList.querySelector('.list1')
+      let list2 = underNavList.querySelector('.list2')
+      let list3 = underNavList.querySelector('.list3')
+      let list4 = underNavList.querySelector('.list4')
+      let list5 = underNavList.querySelector('.list5')
+      let list6 = underNavList.querySelector('.list6')
+      let list7 = underNavList.querySelector('.list7')
+      let timeout = null
+      
+      cartWrap.addEventListener("mouseover", function () {
+        content.style.height = "120px"
+        cartMenu.style.background = "#ffffff"
+        cartbox.style.color = "#ff6700"
+        if (timeout === null) {
+          timeout = setTimeout(() => {
+            loading.classList.value += ' hide'
+            contentText.classList.value = 'content-text'
+            timeout = null
+          }, 2000);
+        }
+      })
+      cartWrap.addEventListener("mouseout", function () {
+        cartMenu.style.background = "rgb(92, 92, 92)"
+        cartbox.style.color = "#b0b0b0"
+        content.style.height = "0px"
+      })
+
+      midNav.addEventListener("mouseover",function(e){
+        underNavList.style.height = "200px"
+        if(e.target.className === "" || e.target.className === "mid-nav" ){
+          return
+        }
+        switch (e.target.className) {
+          case 'mid-nav-item1':
+            list1.className = "list1 listed"
+            break;
+          case 'mid-nav-item2':
+            
+            break;
+          case 'mid-nav-item3':
+            
+            break;
+          case 'mid-nav-item4':
+            
+            break;
+          case 'mid-nav-item5':
+            
+            break;
+          case 'mid-nav-item6':
+            
+            break;
+          case 'mid-nav-item7':
+            
+            break;
+        
+          default:
+            break;
+        }
+      })
+      midNav.addEventListener("mouseout",function(e){
+        underNavList.style.height = "0px"
+
+      })
+    })()
+  </script>
+</body>
+
+</html>
