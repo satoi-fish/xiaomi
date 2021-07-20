@@ -116,7 +116,7 @@
       background-color: #fff;
       box-shadow: 0 2px 10px rgb(0 0 0 / 15%);
       overflow: hidden;
-      z-index: 0;
+      z-index: 1;
     }
 
     .loading {
@@ -179,20 +179,23 @@
       height: 55px;
       line-height: 55px;
     }
-
     .mid-nav a {
       color: #222;
+    }
+    .mid-nav a:hover {
+      color: #ff6700;
     }
 
     .searching {
       width: 296px;
       height: 55px;
       position: relative;
+      margin-top: 5px;
     }
 
     .search-box {
       width: 232px;
-      height: 55px;
+      height: 48px;
       font-size: 16px;
       padding-left: 8px;
       border: 1px solid #444;
@@ -201,7 +204,7 @@
 
     .search-icon {
       width: 52px;
-      height: 53px;
+      height: 46px;
       position: relative;
       right: 6px;
       top: -1px;
@@ -341,9 +344,9 @@
           <input type="submit" value="" class="search-icon"></input>
         </form>
       </div>
-      <div class="under-nav-list" style="height: 200px;">
+      <div class="under-nav-list" style="height: 0px;">
         <div class="under-wrap">
-          <div class="list1 listed">
+          <div class="list1 listed hide">
             <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/85e44ea2405ff8414148bbde7446b137.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
             <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/1a359e9346e3c6ee8c9d8389e3fd9458.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
             <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/a1c45eadcedeb27b1cafca0359422da9.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
@@ -352,52 +355,51 @@
             <div class="list-item-end"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/963679eaf3937351e154600ab3448460.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
           </div>
           <div class="list2 listed hide">
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item-end"><img src="" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e3c5d99c28700a3c45ea65eebbea0a04.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/88bb84ff06f0ab467b859aeed36b817a.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/acd0f27496ccdf81ef42124c35e8bfc4.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/d07671f25a2b3a6c3d4fac189f28fbe9.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ecebd50c7840bb03d7b5e3bfe4d439c2.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item-end"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/584add2c9cfdb9eefe7b642bf191773a.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
           </div>
           <div class="list3 listed hide">
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item-end"><img src="" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/2626643d50f029c89f9dce1d6fc92273.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/c40ca118f075d39c5b7c2ee30cccddc4.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e513ac03d0ebb594bf42f7d6b1b44944.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/932b583c6eccd8aabfa0771f8a854940.jpg?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ea3390a20547c7298a258528e4aa69ad.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item-end"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/0112cb7e2ea8489fbd36ce3a781d5232.jpg?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
           </div>
           <div class="list4 listed hide">
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item-end"><img src="" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/eaa9aaf2b53fff98ad651589fffc3e21.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/37fcbe3b823c837b6ffe7f59f7aa579e.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/789c69b743d9c46a39dd179cefdbce7c.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9ef482fe00cdcb7294e4029543ca9b9b.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9ef482fe00cdcb7294e4029543ca9b9b.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item-end"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/7872a4195d666f08bef0877562dd7fe7.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
           </div>
           <div class="list5 listed hide">
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item-end"><img src="" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/b7a4e3ff7919ca2407ad970b78abd09a.jpg?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/65df9e92c06dcd148de5f0eb13e16ea2.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/11b8bca444aba2994fe852993eac9203.png?thumb=1&w=160&h=110" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/c82798dbbc793c8bd52929dbe86b316f.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/48d69ed4cc41d5c9d33bdeefd7f1da69.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item-end"><img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/c5d772b7c2a159c3ed7d4e31bd293f18.jpg?thumb=1&w=160&h=110" alt=""></div>
           </div>
           <div class="list6 listed hide">
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item-end"><img src="" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/2a759fa795d749f0538cfd2a15890027.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/2815a0a208be362cba673aae9a1f9c93.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/27da43294889d049a111e5ff2cdfafe7.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/359d3c63cc159949d8fe147a11b4bc40.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/aa1e0a4860cf40d34e1192d86691c82c.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item-end"><img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/ec5be5f93ac0118aeec27b8df4337fc9.jpg?thumb=1&w=160&h=110" alt=""></div>
           </div>
           <div class="list7 listed hide">
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item"><img src="" alt=""></div>
-            <div class="list-item-end"><img src="" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/2b87ae4a36beef69bb2018eb1f8bce9b.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9c6a5f44fd12afa182367ed8d1716421.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f6e585a4bf5c0f744ca60f19ecd6fadf.jpg?thumb=1&w=160&h=110" alt=""></div>
+            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/17c0c91317ec0def3ecc072fa9480192.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item-end"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/12cdacc6e4f343861d31345036cc3b46.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
           </div>
         </div>
       </div>
@@ -434,6 +436,7 @@
       let list6 = underNavList.querySelector('.list6')
       let list7 = underNavList.querySelector('.list7')
       let timeout = null
+      let num = 0
       
       cartWrap.addEventListener("mouseover", function () {
         content.style.height = "120px"
@@ -455,40 +458,79 @@
 
       midNav.addEventListener("mouseover",function(e){
         underNavList.style.height = "200px"
-        if(e.target.className === "" || e.target.className === "mid-nav" ){
+        if(e.target.className === "mid-nav" ){
           return
+        }
+        console.log(1);
+        switch (num) {
+          case 1:
+            list1.className += " hide"
+            num = 0
+            break;
+          case 2:
+            list2.className += " hide"
+            num = 0
+            break;
+          case 3:
+            list3.className += " hide"
+            num = 0
+            break;
+          case 4:
+            list4.className += " hide"
+            num = 0
+            break;
+          case 5:
+            list5.className += " hide"
+            num = 0
+            break;
+          case 6:
+            list6.className += " hide"
+            num = 0
+            break;
+          case 7:
+            list7.className += " hide"
+            num = 0
+            break;
+          default:
+            break;
         }
         switch (e.target.className) {
           case 'mid-nav-item1':
+            num = 1
             list1.className = "list1 listed"
             break;
           case 'mid-nav-item2':
-            
+            num = 2
+            list2.className = "list2 listed"
             break;
           case 'mid-nav-item3':
-            
+            num = 3
+            list3.className = "list3 listed"
             break;
           case 'mid-nav-item4':
-            
+            num = 4
+            list4.className = "list4 listed"
             break;
           case 'mid-nav-item5':
-            
+            num = 5
+            list5.className = "list5 listed"
             break;
           case 'mid-nav-item6':
-            
+            num = 6
+            list6.className = "list6 listed"
             break;
           case 'mid-nav-item7':
-            
+            num = 7
+            list7.className = "list7 listed"
             break;
-        
           default:
             break;
         }
       })
-      midNav.addEventListener("mouseout",function(e){
+      midNav.addEventListener("mouseleave",function(e){
         underNavList.style.height = "0px"
-
       })
+
     })()
   </script>
 </body>
