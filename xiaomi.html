@@ -22,6 +22,10 @@
       color: #b0b0b0;
     }
 
+    p{
+      margin: 0px;
+      padding:0px;
+    }
     .topbar {
       width: 100%;
       font-size: 12px;
@@ -216,6 +220,7 @@
       overflow: hidden;
       transition: all 0.3s;
       position: absolute;
+      z-index:9;
       left: 0;
       top: 140px;
       width: 100%;
@@ -237,6 +242,23 @@
     }
     .list-item{
       position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .list-item-end{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .list-item p,.list-item-end p {
+      margin-top: 15px;
+      font-size: 13px;
+    }
+    .list-item span,.list-item-end span {
+      margin-top: 3px;
+      font-size: 10px;
+      color: #ff6700;
     }
     .list-item::after{
       content:"";
@@ -248,11 +270,60 @@
       height: 120px;
       border-right: 1px solid #ccc;
     }
-
-
+    .menu-lbt{
+      width: 1226px;
+      height: 460px;
+      margin: 20px auto;
+      position: relative;
+    }
+    .lbt-box{
+      position: relative;
+      display: flex;
+      z-index: 1;
+    }
+    .lbt-box-prev,.lbt-box-next{
+      width: 40px;
+      height: 70px;
+      background-color: rgba(0, 0, 0, .0);
+      position: absolute;
+      top: 50%;
+      transform:translate(0,-50%);
+      z-index:2;
+    }
+    .lbt-box-prev:hover,.lbt-box-next:hover{
+      background-color: rgba(0, 0, 0, .4);
+    }
+    .lbt-box-prev{
+      left: 223px;
+    }
+    .lbt-box-next{
+      right: 0;
+    }
+    .prev-bottom{
+      background-color: rgba(0, 0, 0, .2);
+      display: block;
+      width: 100%;
+      height: 100%;
+      clip-path: polygon(65% 30%,75% 30%,40% 50%,75% 70%,65% 70%,30% 50%);
+    }
+    .next-bottom{
+      background-color: rgba(0, 0, 0, .2);
+      width: 100%;
+      height: 100%;
+      display: block;
+      clip-path: polygon(25% 30%,35% 30%,80% 50%,35% 70%,25% 70%,70% 50%);
+    }
+    .lbt-box img{
+      position: relative;
+      transition-property: opacity;
+      width: 100%;
+      height: 100%;
+      display: flex;
+    }
     @keyframes up-down {
       from {
         height: 12px;
+
         background-color: #ff6700;
       }
 
@@ -347,59 +418,223 @@
       <div class="under-nav-list" style="height: 0px;">
         <div class="under-wrap">
           <div class="list1 listed hide">
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/85e44ea2405ff8414148bbde7446b137.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/1a359e9346e3c6ee8c9d8389e3fd9458.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/a1c45eadcedeb27b1cafca0359422da9.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/56e3379b5422cb06e5c8a0c546445606.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/f9149ef3ba2c9025a4a21c98ae793808.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item-end"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/963679eaf3937351e154600ab3448460.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/85e44ea2405ff8414148bbde7446b137.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米MIX FOLD</p>
+              <span>9999元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/1a359e9346e3c6ee8c9d8389e3fd9458.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米11 Ultra</p>
+              <span>5499元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/a1c45eadcedeb27b1cafca0359422da9.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米11 Pro</p>
+              <span>4499元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/56e3379b5422cb06e5c8a0c546445606.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米11 青春版</p>
+              <span>2099元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/f9149ef3ba2c9025a4a21c98ae793808.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米10S</p>
+              <span>2999元起</span>
+            </div>
+            <div class="list-item-end">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/963679eaf3937351e154600ab3448460.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米11</p>
+              <span>3799元起</span>
+            </div>
           </div>
           <div class="list2 listed hide">
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e3c5d99c28700a3c45ea65eebbea0a04.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/88bb84ff06f0ab467b859aeed36b817a.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/acd0f27496ccdf81ef42124c35e8bfc4.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/d07671f25a2b3a6c3d4fac189f28fbe9.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ecebd50c7840bb03d7b5e3bfe4d439c2.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item-end"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/584add2c9cfdb9eefe7b642bf191773a.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e3c5d99c28700a3c45ea65eebbea0a04.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/88bb84ff06f0ab467b859aeed36b817a.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/acd0f27496ccdf81ef42124c35e8bfc4.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/d07671f25a2b3a6c3d4fac189f28fbe9.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ecebd50c7840bb03d7b5e3bfe4d439c2.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item-end">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/584add2c9cfdb9eefe7b642bf191773a.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
           </div>
           <div class="list3 listed hide">
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/2626643d50f029c89f9dce1d6fc92273.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/c40ca118f075d39c5b7c2ee30cccddc4.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e513ac03d0ebb594bf42f7d6b1b44944.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/932b583c6eccd8aabfa0771f8a854940.jpg?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ea3390a20547c7298a258528e4aa69ad.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item-end"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/0112cb7e2ea8489fbd36ce3a781d5232.jpg?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/2626643d50f029c89f9dce1d6fc92273.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/c40ca118f075d39c5b7c2ee30cccddc4.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e513ac03d0ebb594bf42f7d6b1b44944.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/932b583c6eccd8aabfa0771f8a854940.jpg?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ea3390a20547c7298a258528e4aa69ad.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item-end">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/0112cb7e2ea8489fbd36ce3a781d5232.jpg?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
           </div>
           <div class="list4 listed hide">
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/eaa9aaf2b53fff98ad651589fffc3e21.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/37fcbe3b823c837b6ffe7f59f7aa579e.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/789c69b743d9c46a39dd179cefdbce7c.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9ef482fe00cdcb7294e4029543ca9b9b.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9ef482fe00cdcb7294e4029543ca9b9b.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item-end"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/7872a4195d666f08bef0877562dd7fe7.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/eaa9aaf2b53fff98ad651589fffc3e21.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/37fcbe3b823c837b6ffe7f59f7aa579e.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/789c69b743d9c46a39dd179cefdbce7c.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9ef482fe00cdcb7294e4029543ca9b9b.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9ef482fe00cdcb7294e4029543ca9b9b.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item-end">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/7872a4195d666f08bef0877562dd7fe7.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
           </div>
           <div class="list5 listed hide">
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/b7a4e3ff7919ca2407ad970b78abd09a.jpg?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/65df9e92c06dcd148de5f0eb13e16ea2.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/11b8bca444aba2994fe852993eac9203.png?thumb=1&w=160&h=110" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/c82798dbbc793c8bd52929dbe86b316f.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/48d69ed4cc41d5c9d33bdeefd7f1da69.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item-end"><img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/c5d772b7c2a159c3ed7d4e31bd293f18.jpg?thumb=1&w=160&h=110" alt=""></div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/b7a4e3ff7919ca2407ad970b78abd09a.jpg?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/65df9e92c06dcd148de5f0eb13e16ea2.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/11b8bca444aba2994fe852993eac9203.png?thumb=1&w=160&h=110" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/c82798dbbc793c8bd52929dbe86b316f.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/48d69ed4cc41d5c9d33bdeefd7f1da69.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item-end">
+              <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/c5d772b7c2a159c3ed7d4e31bd293f18.jpg?thumb=1&w=160&h=110" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
           </div>
           <div class="list6 listed hide">
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/2a759fa795d749f0538cfd2a15890027.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/2815a0a208be362cba673aae9a1f9c93.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/27da43294889d049a111e5ff2cdfafe7.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/359d3c63cc159949d8fe147a11b4bc40.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/aa1e0a4860cf40d34e1192d86691c82c.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item-end"><img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/ec5be5f93ac0118aeec27b8df4337fc9.jpg?thumb=1&w=160&h=110" alt=""></div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/2a759fa795d749f0538cfd2a15890027.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/2815a0a208be362cba673aae9a1f9c93.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/27da43294889d049a111e5ff2cdfafe7.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/359d3c63cc159949d8fe147a11b4bc40.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/aa1e0a4860cf40d34e1192d86691c82c.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item-end">
+              <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/ec5be5f93ac0118aeec27b8df4337fc9.jpg?thumb=1&w=160&h=110" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
           </div>
           <div class="list7 listed hide">
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/2b87ae4a36beef69bb2018eb1f8bce9b.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9c6a5f44fd12afa182367ed8d1716421.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f6e585a4bf5c0f744ca60f19ecd6fadf.jpg?thumb=1&w=160&h=110" alt=""></div>
-            <div class="list-item"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/17c0c91317ec0def3ecc072fa9480192.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
-            <div class="list-item-end"><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/12cdacc6e4f343861d31345036cc3b46.png?thumb=1&w=160&h=110&f=webp&q=90" alt=""></div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/2b87ae4a36beef69bb2018eb1f8bce9b.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9c6a5f44fd12afa182367ed8d1716421.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f6e585a4bf5c0f744ca60f19ecd6fadf.jpg?thumb=1&w=160&h=110" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/17c0c91317ec0def3ecc072fa9480192.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
+            <div class="list-item-end">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/12cdacc6e4f343861d31345036cc3b46.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
+              <p>小米手机</p>
+              <span>2333元起</span>
+            </div>
           </div>
         </div>
       </div>
@@ -411,7 +646,17 @@
         
       </div>
       <div class="menu-lbt">
-
+        <div class="lbt-box">
+          <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e6e5ad482c9e0bc0aff2153bca94c0da.jpg?thumb=1&w=1226&h=460&f=webp&q=90" alt=""> 
+          <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/268aadece1368da98fcf5553b657cdb3.jpg?w=1226&h=460" alt=""> 
+          <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/1c3e97686468231f3f78048d7f2b7fdc.jpg?thumb=1&w=1226&h=460&f=webp&q=90" alt="">
+          <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/5e896d87c53a449509c14701673098bb.jpg?thumb=1&w=1226&h=460&f=webp&q=90" alt="">
+          <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/37de2b47154ae899cd31f4dcc291f1a2.jpg?thumb=1&w=1226&h=460&f=webp&q=90" alt=""> 
+          <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e6e5ad482c9e0bc0aff2153bca94c0da.jpg?thumb=1&w=1226&h=460&f=webp&q=90" alt=""> 
+          <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/268aadece1368da98fcf5553b657cdb3.jpg?w=1226&h=460" alt=""> 
+        </div>
+        <div class="lbt-box-prev"><span class="prev-bottom"></span></div>
+        <div class="lbt-box-next"><span class="next-bottom"></span></div>
       </div>
     </div>
   </section>
@@ -435,9 +680,93 @@
       let list5 = underNavList.querySelector('.list5')
       let list6 = underNavList.querySelector('.list6')
       let list7 = underNavList.querySelector('.list7')
+      let lbt = document.querySelector('.lbt-box')
+      let lbtImg = lbt.querySelectorAll('img')
+      console.log(lbtImg);
       let timeout = null
       let num = 0
-      
+      let prev = 0
+      let active = 1
+      let next = 2
+      let imgWidth = 1226
+
+
+
+      // 轮播图
+      for (const i in lbtImg) {
+        if(i < lbtImg.length){
+          // console.log(lbtImg[i].style);
+          lbtImg[i].style.transform = `translate3d(${imgWidth * i * -1 + "px"},0,0)`
+          lbtImg[i].style.opacity = "0"
+        }
+      }
+
+      lbtImg[prev].style.opacity = "1"
+      lbtImg[active].style.opacity = "1"
+      lbtImg[next].style.opacity = "0"
+
+      function goNext(){
+        prev = active
+        active = next
+        next = (next + 1) % lbtImg.length
+        if(next === 0){
+          next = 2
+        }
+        if(prev === 6){
+          prev = 1
+        }
+        if(active === 2){
+          for (let j = next + 1; j  < lbtImg.length; j++) {
+            lbtImg[j].style.opacity = "0"            
+          }
+        }
+      }
+
+      function goPrev(){
+        next = active
+        active = prev
+        prev = (prev - 1) % lbtImg.length
+
+        lbtImg[prev].style.opacity = "1"
+          lbtImg[prev].style.transitionDuration = "0ms"
+          lbtImg[active].style.opacity = "1"
+          lbtImg[active].style.transitionDuration = "800ms"
+          lbtImg[next].style.opacity = "0"
+          lbtImg[next].style.transitionDuration = "0ms"
+      }
+
+      setInterval(() => {
+        if(isHover){
+          prev = active
+          active = next
+          next = (next + 1) % lbtImg.length
+
+          if(next === 0){
+            next = 2
+          }
+
+          if(prev === 6){
+            prev = 1
+          }
+
+          if(active === 2){
+            for (let j = next + 1; j  < lbtImg.length; j++) {
+              lbtImg[j].style.opacity = "0"            
+            }
+          }
+
+          lbtImg[prev].style.opacity = "1"
+          lbtImg[prev].style.transitionDuration = "0ms"
+          lbtImg[active].style.opacity = "1"
+          lbtImg[active].style.transitionDuration = "800ms"
+          lbtImg[next].style.opacity = "0"
+          lbtImg[next].style.transitionDuration = "0ms"
+
+        }        
+      }, 3000);
+
+
+      // 购物车
       cartWrap.addEventListener("mouseover", function () {
         content.style.height = "120px"
         cartMenu.style.background = "#ffffff"
@@ -456,12 +785,12 @@
         content.style.height = "0px"
       })
 
+      // 顶部导栏
       midNav.addEventListener("mouseover",function(e){
         underNavList.style.height = "200px"
         if(e.target.className === "mid-nav" ){
           return
         }
-        console.log(1);
         switch (num) {
           case 1:
             list1.className += " hide"
