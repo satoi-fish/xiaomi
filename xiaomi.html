@@ -1,978 +1,2205 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: scroll;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      overflow: scroll;
-    }
+      input {
+        padding: 0;
+      }
 
-    input {
-      padding: 0;
-    }
+      a {
+        text-decoration: none;
+        color: #b0b0b0;
+      }
 
-    a {
-      text-decoration: none;
-      color: #b0b0b0;
-    }
+      p {
+        margin: 0px;
+        padding: 0px;
+      }
+      .topbar {
+        width: 100%;
+        font-size: 12px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        display: flex;
+        background-color: #333;
+      }
+      .topbar .active {
+        color: #ff6700;
+      }
 
-    p{
-      margin: 0px;
-      padding:0px;
-    }
-    .topbar {
-      width: 100%;
-      font-size: 12px;
-      height: 40px;
-      line-height: 40px;
-      text-align: center;
-      display: flex;
-      position: relative;
-      background-color: #333;
-    }
-    .topbar 
+      .wrap {
+        justify-content: space-between;
+        width: 1226px;
+        margin: 0 auto;
+        display: flex;
+        flex-shrink: 0;
+      }
+      .topbar div:hover {
+        color: #fff;
+      }
+      .topbar .box::after {
+        content: "|";
+        color: #424242;
+        display: block;
+        margin-left: 6px;
+      }
 
-    .active {
-      color: #ff6700;
-    }
+      .left a,
+      .right-left a {
+        color: #b0b0b0;
+      }
 
-    .wrap {
-      justify-content: space-between;
-      width: 1226px;
-      margin: 0 auto;
-      display: flex;
-      flex-shrink: 0;
-    }
-
-    .topbar .box::after {
-      content: "|";
-      color: #424242;
-      display: block;
-      margin-left: 6px;
-    }
-
-    .left a,
-    .right-left a {
-      color: #b0b0b0;
-    }
-
-    /* .topbar a:hover {
+      /* .topbar a:hover {
         color: #ff6700;
       } */
-    .left {
-      display: flex;
-    }
-
-    .right {
-      position: relative;
-      display: flex;
-    }
-
-    .right-left {
-      position: relative;
-      display: flex;
-    }
-
-    .left div,
-    .right div {
-      margin-right: 6px;
-      /* flex-shrink: 0; */
-      display: flex;
-    }
-
-    .cartMenu {
-      position: relative;
-      display: flex;
-      margin-left: 20px;
-      width: 120px;
-      height: 40px;
-      justify-content: center;
-      background-color: rgb(92, 92, 92);
-      transition: all 0.3s;
-      /* box-shadow: 0 2px 10px rgb(0 0 0 / 15%); */
-      z-index: 9;
-    }
-
-    .cartbox {
-      cursor: pointer;
-      width: 100%;
-      position: relative;
-      z-index: 2;
-    }
-
-    .content {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s;
-      right: 5px;
-      width: 350px;
-      /* height: 120px; */
-      background-color: #fff;
-      box-shadow: 0 2px 10px rgb(0 0 0 / 15%);
-      overflow: hidden;
-      z-index: 9;
-    }
-
-    .loading {
-      position: relative;
-      width: 4px;
-      height: 8px;
-      background-color: #ff6700;
-      animation-name: up-down;
-      animation-duration: .5s;
-      animation-iteration-count: infinite;
-    }
-
-    .loading::after,
-    .loading::before {
-      content: "";
-      position: absolute;
-      top: 2px;
-      width: 4px;
-      height: 8px;
-      background-color: #ff6700;
-      animation-name: up-down2;
-      animation-duration: .4s;
-      animation-iteration-count: infinite;
-    }
-
-    .loading::before {
-      left: 6px;
-      animation-delay: .2s;
-    }
-
-    .loading::after {
-      right: 6px;
-      animation-delay: .2s;
-    }
-
-
-    .under-bar {
-      display: flex;
-      justify-content: space-between;
-      width: 1226px;
-      margin: 20px auto;
-    }
-    .logo{
-      width: 234px;
-    }
-    .logo img {
-      width: 100%;
-      height: 100%;
-    }
-
-    .logo-wrap {
-      width: 55px;
-      height: 55px;
-    }
-
-    .mid-nav {
-      width: 600px;
-      display: flex;
-      margin-left: -70px;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 16px;
-      height: 55px;
-      line-height: 55px;
-    }
-    .mid-nav a {
-      color: #222;
-    }
-    .mid-nav a:hover {
-      color: #ff6700;
-    }
-
-    .searching {
-      width: 296px;
-      height: 55px;
-      position: relative;
-      margin-top: 5px;
-    }
-    .search-box{
-      position: relative;
-    }
-    .search-text {
-      position: absolute;
-      width: 223px;
-      height: 48px;
-      line-height: 48px;
-      font-size: 14px;
-      padding:0 10px;
-      border: 1px solid rgba(0, 0, 0, .2);
-      box-sizing: content-box;
-    }
-    .search-text:focus{
-      outline: none;
-      border: 1px solid #ff6700;
-    }
-
-    .search-icon {
-      width: 52px;
-      height: 50px;
-      position: absolute;
-      right: 5px;
-      top: 0px;
-      outline: none;
-      background-color: #fff;
-      border: 1px solid rgba(0, 0, 0, .2);
-      border-radius: 0px;
-      box-sizing: border-box;
-    }
-    .under-nav-list{
-      overflow: hidden;
-      transition: all 0.3s;
-      position: absolute;
-      z-index:99;
-      left: 0;
-      top: 140px;
-      width: 100%;
-      background-color: #eee;
-      box-shadow: 0 2px 10px #ddd;
-    }
-    .under-wrap{
-      width: 1226px;
-      margin: 0 auto;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-    }
-    .listed{
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      flex:1;
-    }
-    .list-item{
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .list-item-end{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .list-item p,.list-item-end p {
-      margin-top: 15px;
-      font-size: 13px;
-    }
-    .list-item span,.list-item-end span {
-      margin-top: 3px;
-      font-size: 10px;
-      color: #ff6700;
-    }
-    .list-item::after{
-      content:"";
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 60px;
-      width: 120px;
-      height: 120px;
-      border-right: 1px solid #ccc;
-    }
-    .menu {
-      width: 1226px;
-      height: 460px;
-      margin: 20px auto;
-      position: relative;
-    }
-    .menu-list{
-      position: absolute;
-      z-index: 9;
-      width: 233px;
-      height: 460px;
-      background-color: rgba(105,101,101,.6);
-      display: flex;
-      flex-direction: column;
-    }
-    .menu-list-wrap{
-      margin: 20px 0;
-    }
-    .menu-list-item{
-      font-size: 15px;
-      height: 42px;
-      line-height: 42px;
-      padding-left: 23px;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .menu-list-item:hover{
-      background-color: #ff6700;
-    }
-    .menu-item-Rarrow{
-      background-color: #fff;
-      clip-path: polygon(25.5% 22.5%,33% 15%,67% 50%,33% 85%,25.5% 77.5%,52% 50%);
-      border-radius: 10px;
-      margin-right: 20px;
-      width: 16px;
-      height: 16px;
-    }
-    .lbt-box{
-      display: flex;
-    }
-    .lbt-box-prev,.lbt-box-next{
-      width: 40px;
-      height: 70px;
-      background-color: rgba(0, 0, 0, .0);
-      position: absolute;
-      top: 50%;
-      transform:translate(0,-50%);
-      z-index:2;
-    }
-    .lbt-box-prev:hover,.lbt-box-next:hover{
-      background-color: rgba(0, 0, 0, .4);
-    }
-    .lbt-box-prev{
-      left: 234px;
-    }
-    .lbt-box-next{
-      right: 0;
-    }
-    .lbt-box-prev:hover::before,.lbt-box-next:hover::after{
-       background-color: rgba(255, 255, 255, 0.8);
-    }
-    .lbt-box-prev::before{
-      content: "";
-      background-color: rgba(0, 0, 0, .2);
-      display: block;
-      width: 100%;
-      height: 100%;
-      clip-path: polygon(65% 30%,72% 30%,40% 50%,72% 70%,65% 70%,33% 50%);
-    }
-    .lbt-box-next::after{
-      content: "";
-      background-color: rgba(0, 0, 0, .2);
-      width: 100%;
-      height: 100%;
-      display: block;
-      clip-path: polygon(45% 30%,38% 30%,73% 50%,38% 70%,45% 70%,80% 50%);
-    }
-    
-    .lbt-box img{
-      position: relative;
-      transition-property: opacity;
-      width: 100%;
-      height: 100%;
-      display: flex;
-    }
-    @keyframes up-down {
-      from {
-        height: 12px;
-
-        background-color: #ff6700;
+      .left {
+        display: flex;
       }
 
-      to {
-        height: 8px;
-        background-color: #ff9f5f;
+      .right {
+        position: relative;
+        display: flex;
       }
-    }
 
-    @keyframes up-down2 {
-      from {
+      .right-left {
+        position: relative;
+        display: flex;
+      }
+
+      .left div,
+      .right div {
+        margin-right: 6px;
+        /* flex-shrink: 0; */
+        display: flex;
+      }
+
+      .cartMenu {
+        position: relative;
+        display: flex;
+        margin-left: 20px;
+        width: 120px;
+        height: 40px;
+        justify-content: center;
+        background-color: #424242;
+        transition: all 0.3s;
+        /* box-shadow: 0 2px 10px rgb(0 0 0 / 15%); */
+        z-index: 9;
+      }
+
+      .cartbox {
+        cursor: pointer;
+        width: 100%;
+        position: relative;
+        z-index: 2;
+      }
+
+      .content {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+        right: 5px;
+        width: 350px;
+        /* height: 120px; */
+        background-color: #fff;
+        box-shadow: 0 2px 10px rgb(0 0 0 / 15%);
+        overflow: hidden;
+        z-index: 9;
+      }
+
+      .loading {
+        position: relative;
+        width: 4px;
         height: 8px;
         background-color: #ff6700;
+        animation-name: up-down;
+        animation-duration: 0.5s;
+        animation-iteration-count: infinite;
       }
 
-      to {
-        height: 5px;
-        background-color: #ff9f5f;
+      .loading::after,
+      .loading::before {
+        content: "";
+        position: absolute;
+        top: 2px;
+        width: 4px;
+        height: 8px;
+        background-color: #ff6700;
+        animation-name: up-down2;
+        animation-duration: 0.4s;
+        animation-iteration-count: infinite;
       }
-    }
 
-    .hide {
-      display: none;
-    }
-  </style>
-</head>
+      .loading::before {
+        left: 6px;
+        animation-delay: 0.2s;
+      }
 
-<body>
-  <header>
-    <div class="topbar">
-      <div class="wrap">
-        <div class="left">
-          <div class="box"><a href="#">小米商城</a></div>
-          <div class="box"><a href="#">MIUI</a></div>
-          <div class="box"><a href="#">loT</a></div>
-          <div class="box"><a href="#">云服务</a></div>
-          <div class="box"><a href="#">天星数科</a></div>
-          <div class="box"><a href="#">有品</a></div>
-          <div class="box"><a href="#">小爱开放平台</a></div>
-          <div class="box"><a href="#">企业团购</a></div>
-          <div class="box"><a href="#">资质证照</a></div>
-          <div class="box"><a href="#">协议规则</a></div>
-          <div class="box"><a href="#">下载app</a></div>
-          <div class="box"><a href="#">智能生活</a></div>
-          <div><a href="#">Seletion Location</a></div>
-        </div>
-        <div class="right">
-          <div class="right-left">
-            <div class="login box"><a href="#">登录</a></div>
-            <div class="box"><a href="#">注册</a></div>
-            <div><a href="#">消息通知</a></div>
-          </div>
-          <span class="cart-wrap">
-            <div class="cartMenu">
-              <a href="#" class="cartbox">
-                <em class="icon-font cart"></em>
-                <span class="cartbox-text">购物车</span>
-                <span>(0)</span>
-              </a>
-            </div>
-            <nav style="height: 0px;" class="content">
-              <nav class="loading"></nav>
-              <span class="content-text hide">您没有加入任何商品到购物车哦~</span>
-            </nav>
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class="under-bar">
-      <div class="logo">
-        <div class="logo-wrap">
-          <img src="https://s02.mifile.cn/assets/static/image/logo-mi2.png" alt="小米logo">
-        </div>
-      </div>
-      <div class="mid-nav">
-        <div><a class="mid-nav-item1" href="#">小米手机</a></div>
-        <div><a class="mid-nav-item2" href="#">Redmi红米</a></div>
-        <div><a class="mid-nav-item3" href="#">电视</a></div>
-        <div><a class="mid-nav-item4" href="#">笔记本</a></div>
-        <div><a class="mid-nav-item5" href="#">家电</a></div>
-        <div><a class="mid-nav-item6" href="#">路由器</a></div>
-        <div><a class="mid-nav-item7" href="#">智能硬件</a></div>
-        <div><a href="#">服务</a></div>
-        <div><a href="#">社区</a></div>
-      </div>
-      <div class="searching">
-        <form class="search-box">
-          <input type="text" class="search-text" placeholder="小米手机">
-          <input type="submit" value="" class="search-icon"></input>
-        </form>
-      </div>
-      <div class="under-nav-list" style="height: 0px;">
-        <div class="under-wrap">
-          <div class="list1 listed hide">
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/85e44ea2405ff8414148bbde7446b137.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米MIX FOLD</p>
-              <span>9999元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/1a359e9346e3c6ee8c9d8389e3fd9458.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米11 Ultra</p>
-              <span>5499元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/a1c45eadcedeb27b1cafca0359422da9.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米11 Pro</p>
-              <span>4499元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/56e3379b5422cb06e5c8a0c546445606.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米11 青春版</p>
-              <span>2099元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/f9149ef3ba2c9025a4a21c98ae793808.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米10S</p>
-              <span>2999元起</span>
-            </div>
-            <div class="list-item-end">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/963679eaf3937351e154600ab3448460.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米11</p>
-              <span>3799元起</span>
-            </div>
-          </div>
-          <div class="list2 listed hide">
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e3c5d99c28700a3c45ea65eebbea0a04.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/88bb84ff06f0ab467b859aeed36b817a.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/acd0f27496ccdf81ef42124c35e8bfc4.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/d07671f25a2b3a6c3d4fac189f28fbe9.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ecebd50c7840bb03d7b5e3bfe4d439c2.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item-end">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/584add2c9cfdb9eefe7b642bf191773a.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-          </div>
-          <div class="list3 listed hide">
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/2626643d50f029c89f9dce1d6fc92273.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/c40ca118f075d39c5b7c2ee30cccddc4.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e513ac03d0ebb594bf42f7d6b1b44944.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/932b583c6eccd8aabfa0771f8a854940.jpg?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ea3390a20547c7298a258528e4aa69ad.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item-end">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/0112cb7e2ea8489fbd36ce3a781d5232.jpg?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-          </div>
-          <div class="list4 listed hide">
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/eaa9aaf2b53fff98ad651589fffc3e21.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/37fcbe3b823c837b6ffe7f59f7aa579e.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/789c69b743d9c46a39dd179cefdbce7c.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9ef482fe00cdcb7294e4029543ca9b9b.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9ef482fe00cdcb7294e4029543ca9b9b.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item-end">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/7872a4195d666f08bef0877562dd7fe7.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-          </div>
-          <div class="list5 listed hide">
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/b7a4e3ff7919ca2407ad970b78abd09a.jpg?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/65df9e92c06dcd148de5f0eb13e16ea2.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/11b8bca444aba2994fe852993eac9203.png?thumb=1&w=160&h=110" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/c82798dbbc793c8bd52929dbe86b316f.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/48d69ed4cc41d5c9d33bdeefd7f1da69.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item-end">
-              <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/c5d772b7c2a159c3ed7d4e31bd293f18.jpg?thumb=1&w=160&h=110" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-          </div>
-          <div class="list6 listed hide">
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/2a759fa795d749f0538cfd2a15890027.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/2815a0a208be362cba673aae9a1f9c93.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/27da43294889d049a111e5ff2cdfafe7.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/359d3c63cc159949d8fe147a11b4bc40.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/aa1e0a4860cf40d34e1192d86691c82c.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item-end">
-              <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/ec5be5f93ac0118aeec27b8df4337fc9.jpg?thumb=1&w=160&h=110" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-          </div>
-          <div class="list7 listed hide">
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/2b87ae4a36beef69bb2018eb1f8bce9b.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9c6a5f44fd12afa182367ed8d1716421.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f6e585a4bf5c0f744ca60f19ecd6fadf.jpg?thumb=1&w=160&h=110" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/17c0c91317ec0def3ecc072fa9480192.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-            <div class="list-item-end">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/12cdacc6e4f343861d31345036cc3b46.png?thumb=1&w=160&h=110&f=webp&q=90" alt="">
-              <p>小米手机</p>
-              <span>2333元起</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-  <section>
-    <div class="menu">
-      <div class="menu-list">
-        <div class="menu-list-wrap">
-          <a href="">
-            <div class="menu-list-item">
-              <span class="menu-item-text">手机 电话卡</span>
-              <div class="menu-item-Rarrow"></div>
-            </div>
-          </a>
-          <a href="">
-            <div class="menu-list-item">
-              <span class="menu-item-text">电视 盒子</span>
-              <div class="menu-item-Rarrow"></div>
-            </div>
-          </a>
-          <a href="">
-            <div class="menu-list-item">
-              <span class="menu-item-text">笔记本 显示器</span>
-              <div class="menu-item-Rarrow"></div>
-            </div>
-          </a>
-          <a href="">
-            <div class="menu-list-item">
-              <span class="menu-item-text">家电 插线板</span>
-              <div class="menu-item-Rarrow"></div>
-            </div>
-          </a>
-          <a href="">
-            <div class="menu-list-item">
-              <span class="menu-item-text">出行 穿戴</span>
-              <div class="menu-item-Rarrow"></div>
-            </div>
-          </a>
-          <a href="">
-            <div class="menu-list-item">
-              <span class="menu-item-text">智能 路由器</span>
-              <div class="menu-item-Rarrow"></div>
-            </div>
-          </a>
-          <a href="">
-            <div class="menu-list-item">
-              <span class="menu-item-text">电源 配件</span>
-              <div class="menu-item-Rarrow"></div>
-            </div>
-          </a>
-          <a href="">
-            <div class="menu-list-item">
-              <span class="menu-item-text">健康 儿童</span>
-              <div class="menu-item-Rarrow"></div>
-            </div>
-          </a>
-          <a href="">
-            <div class="menu-list-item">
-              <span class="menu-item-text">耳机 音箱</span>
-              <div class="menu-item-Rarrow"></div>
-            </div>
-          </a>
-          <a href="">
-            <div class="menu-list-item">
-              <span class="menu-item-text">生活 箱包</span>
-              <div class="menu-item-Rarrow"></div>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="menu-lbt">
-        <div class="lbt-box">
-          <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e6e5ad482c9e0bc0aff2153bca94c0da.jpg?thumb=1&w=1226&h=460&f=webp&q=90" alt=""> 
-          <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/268aadece1368da98fcf5553b657cdb3.jpg?w=1226&h=460" alt=""> 
-          <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/1c3e97686468231f3f78048d7f2b7fdc.jpg?thumb=1&w=1226&h=460&f=webp&q=90" alt="">
-          <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/5e896d87c53a449509c14701673098bb.jpg?thumb=1&w=1226&h=460&f=webp&q=90" alt="">
-          <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/37de2b47154ae899cd31f4dcc291f1a2.jpg?thumb=1&w=1226&h=460&f=webp&q=90" alt=""> 
-          <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e6e5ad482c9e0bc0aff2153bca94c0da.jpg?thumb=1&w=1226&h=460&f=webp&q=90" alt=""> 
-          <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/268aadece1368da98fcf5553b657cdb3.jpg?w=1226&h=460" alt=""> 
-        </div>
-        <div class="lbt-box-prev"></div> 
-        <div class="lbt-box-next"></div>
-      </div>
-    </div>
-  </section>
+      .loading::after {
+        right: 6px;
+        animation-delay: 0.2s;
+      }
 
+      .under-bar {
+        display: flex;
+        width: 1226px;
+        margin: 0px auto;
+        height: 100px;
+      }
+      .logo {
+        width: 234px;
+        height: 100px;
+      }
+      .logo img {
+        width: 100%;
+        height: 100%;
+      }
 
+      .logo-wrap {
+        width: 55px;
+        height: 55px;
+        margin-top: 22.5px;
+      }
 
-  <script>
-    (function () {
-      let cartWrap = document.querySelector('.cart-wrap')
-      let cartMenu = cartWrap.querySelector('.cartMenu')
-      let cartbox = cartMenu.querySelector('.cartbox')
-      let content = cartWrap.querySelector('.content')
-      let loading = content.querySelector('.loading')
-      let contentText = content.querySelector('.content-text')
-      let midNav = document.querySelector('.mid-nav')
-      let underNavList = document.querySelector('.under-nav-list')
-      let list1 = underNavList.querySelector('.list1')
-      let list2 = underNavList.querySelector('.list2')
-      let list3 = underNavList.querySelector('.list3')
-      let list4 = underNavList.querySelector('.list4')
-      let list5 = underNavList.querySelector('.list5')
-      let list6 = underNavList.querySelector('.list6')
-      let list7 = underNavList.querySelector('.list7')
-      let lbt = document.querySelector('.lbt-box')
-      let lbtImg = lbt.querySelectorAll('img')
-      console.log(lbtImg);
-      let timeout = null
-      let num = 0
-      let prev = 0
-      let active = 1
-      let next = 2
-      let imgWidth = 1226
-      let isHover = true
+      .mid-nav {
+        width: 700px;
+        display: flex;
+        font-size: 16px;
+        height: 100px;
+        line-height: 100px;
+      }
+      .mid-nav a {
+        transition: all 0.2s;
+        color: #222;
+      }
+      .mid-nav div {
+        padding-right: 11px;
+        padding-left: 11px;
+        cursor: pointer;
+      }
 
+      .searching {
+        width: 296px;
+        height: 55px;
+        position: relative;
+        margin-top: 22.5px;
+      }
+      .search-box {
+        position: relative;
+      }
+      .search-text {
+        position: absolute;
+        width: 223px;
+        height: 48px;
+        line-height: 48px;
+        font-size: 14px;
+        padding: 0 10px;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        box-sizing: content-box;
+      }
+      .search-text:focus {
+        outline: none;
+        border: 1px solid #ff6700;
+      }
 
+      .search-icon {
+        width: 52px;
+        height: 50px;
+        position: absolute;
+        right: 5px;
+        top: 0px;
+        outline: none;
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 0px;
+        box-sizing: border-box;
+      }
+      .under-nav-list {
+        overflow: hidden;
+        transition: all 0.3s;
+        position: absolute;
+        z-index: 99;
+        left: 0;
+        top: 140px;
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 0 2px 10px #ddd;
+      }
+      .under-wrap {
+        width: 1226px;
+        margin: 0 auto;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+      }
+      .listed {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex: 1;
+      }
+      .list-item {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .list-item-end {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .list-item p,
+      .list-item-end p {
+        margin-top: 15px;
+        font-size: 13px;
+      }
+      .list-item span,
+      .list-item-end span {
+        margin-top: 3px;
+        font-size: 10px;
+        color: #ff6700;
+      }
+      .list-item::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 60px;
+        width: 120px;
+        height: 120px;
+        border-right: 1px solid #ccc;
+      }
+      .menu {
+        width: 1226px;
+        height: 460px;
+        margin: 0px auto;
+        position: relative;
+      }
+      .menu-list {
+        position: absolute;
+        z-index: 9;
+        width: 234px;
+        height: 460px;
+        background-color: rgba(105, 101, 101, 0.6);
+        display: flex;
+        flex-direction: column;
+      }
+      .menu-list-wrap {
+        position: relative;
+        padding: 20px 0;
+      }
+      .menu-list-item {
+        font-size: 14px;
+        height: 42px;
+        line-height: 42px;
+        padding-left: 23px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .menu-list-item:hover {
+        background-color: #ff6700;
+      }
+      .menu-item-Rarrow {
+        background-color: #fff;
+        clip-path: polygon(
+          25.5% 22.5%,
+          33% 15%,
+          67% 50%,
+          33% 85%,
+          25.5% 77.5%,
+          52% 50%
+        );
+        border-radius: 10px;
+        margin-right: 20px;
+        width: 16px;
+        height: 16px;
+        transform: scale(1.2);
+      }
+      .item-detail{
+        position: absolute;
+        top: 0px;
+        left: 234px;
+        background-color: #fff;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0px 8px 16px rgb(0 0 0 / 18%);
+        width: 795px;
+        height: 458px;
+        display: flex;
+        justify-content: space-evenly;
+      }
+      .item-detail-4-list{
+        width: 992px;
+      }
+      .item-detail-list3{
+        display: flex;
+        flex-direction: column;
+        width: 265px;
+      }
+      .item-detail-list4{
+        display: flex;
+        flex-direction: column;
+        width: 248px;
+      }
+      .detail-list-item{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 76px;
+        color: #000;
+        line-height: 76px;
+      }
+      .detail-list-item:hover{
+        cursor: pointer;
+        color: #ff6700;
+      }
 
-      // 轮播图
-      for (const i in lbtImg) {
-        if(i < lbtImg.length){
-          // console.log(lbtImg[i].style);
-          lbtImg[i].style.transform = `translate3d(${imgWidth * i * -1 + "px"},0,0)`
-          lbtImg[i].style.opacity = "0"
+      .lbt-box {
+        display: flex;
+      }
+      .lbt-box-prev,
+      .lbt-box-next {
+        width: 40px;
+        height: 70px;
+        background-color: rgba(0, 0, 0, 0);
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        z-index: 2;
+      }
+      .lbt-box-prev:hover,
+      .lbt-box-next:hover {
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+      .lbt-box-prev {
+        left: 234px;
+      }
+      .lbt-box-next {
+        right: 0;
+      }
+      .lbt-box-prev:hover::before,
+      .lbt-box-next:hover::after {
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+      .lbt-box-prev::before {
+        content: "";
+        background-color: rgba(0, 0, 0, 0.2);
+        display: block;
+        width: 100%;
+        height: 100%;
+        clip-path: polygon(
+          65% 30%,
+          72% 30%,
+          40% 50%,
+          72% 70%,
+          65% 70%,
+          33% 50%
+        );
+      }
+      .lbt-box-next::after {
+        content: "";
+        background-color: rgba(0, 0, 0, 0.2);
+        width: 100%;
+        height: 100%;
+        display: block;
+        clip-path: polygon(
+          45% 30%,
+          38% 30%,
+          73% 50%,
+          38% 70%,
+          45% 70%,
+          80% 50%
+        );
+      }
+
+      .lbt-box img {
+        position: relative;
+        transition-property: opacity;
+        width: 100%;
+        height: 100%;
+        display: flex;
+      }
+      @keyframes up-down {
+        from {
+          height: 12px;
+
+          background-color: #ff6700;
+        }
+
+        to {
+          height: 8px;
+          background-color: #ff9f5f;
         }
       }
 
-      lbtImg[prev].style.opacity = "1"
-      lbtImg[active].style.opacity = "1"
-      lbtImg[next].style.opacity = "0"
+      @keyframes up-down2 {
+        from {
+          height: 8px;
+          background-color: #ff6700;
+        }
 
-      function goNext(){
-        prev = active
-        active = next
-        next = (next + 1) % lbtImg.length
-        if(next === 0){
-          next = 2
+        to {
+          height: 5px;
+          background-color: #ff9f5f;
         }
-        if(prev === 6){
-          prev = 1
-        }
-        if(active === 2){
-          for (let j = next + 1; j  < lbtImg.length; j++) {
-            lbtImg[j].style.opacity = "0"            
+      }
+      .active {
+        color: #ff6700;
+      }
+      .hide {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="topbar">
+        <div class="wrap">
+          <div class="left">
+            <a href="#"><div class="box">小米商城</div></a>
+            <a href="#"><div class="box">MIUI</div></a>
+            <a href="#"><div class="box">loT</div></a>
+            <a href="#"><div class="box">云服务</div></a>
+            <a href="#"><div class="box">天星数科</div></a>
+            <a href="#"><div class="box">有品</div></a>
+            <a href="#"><div class="box">小爱开放平台</div></a>
+            <a href="#"><div class="box">企业团购</div></a>
+            <a href="#"><div class="box">资质证照</div></a>
+            <a href="#"><div class="box">协议规则</div></a>
+            <a href="#"><div class="box">下载app</div></a>
+            <a href="#"><div class="box">智能生活</div></a>
+            <a href="#"><div>Seletion Location</div></a>
+          </div>
+          <div class="right">
+            <div class="right-left">
+              <a href="#"><div class="login box">登录</div></a>
+              <a href="#"><div class="box">注册</div></a>
+              <a href="#"><div>消息通知</div></a>
+            </div>
+            <span class="cart-wrap">
+              <span class="cartMenu">
+                <a href="#" class="cartbox">
+                  <em class="icon-font cart"></em>
+                  <span class="cartbox-text">购物车</span>
+                  <span>(0)</span>
+                </a>
+              </span>
+              <nav style="height: 0px" class="content">
+                <nav class="loading"></nav>
+                <span class="content-text hide"
+                  >您没有加入任何商品到购物车哦~</span
+                >
+              </nav>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="under-bar">
+        <div class="logo">
+          <div class="logo-wrap">
+            <img
+              src="https://s02.mifile.cn/assets/static/image/logo-mi2.png"
+              alt="小米logo"
+            />
+          </div>
+        </div>
+        <div class="mid-nav">
+          <a href="#"><div class="mid-nav-item1">小米手机</div></a>
+          <a href="#"><div class="mid-nav-item2">Redmi红米</div></a>
+          <a href="#"><div class="mid-nav-item3">电视</div></a>
+          <a href="#"><div class="mid-nav-item4">笔记本</div></a>
+          <a href="#"><div class="mid-nav-item5">家电</div></a>
+          <a href="#"><div class="mid-nav-item6">路由器</div></a>
+          <a href="#"><div class="mid-nav-item7">智能硬件</div></a>
+          <a href="#"><div>服务</div></a>
+          <a href="#"><div>社区</div></a>
+        </div>
+        <div class="searching">
+          <form class="search-box">
+            <input type="text" class="search-text" placeholder="小米手机" />
+            <input type="submit" value="" class="search-icon" />
+          </form>
+        </div>
+        <div class="under-nav-list" style="height: 0px">
+          <div class="under-wrap">
+            <div class="list1 listed hide">
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/85e44ea2405ff8414148bbde7446b137.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米MIX FOLD</p>
+                <span>9999元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/1a359e9346e3c6ee8c9d8389e3fd9458.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米11 Ultra</p>
+                <span>5499元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/a1c45eadcedeb27b1cafca0359422da9.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米11 Pro</p>
+                <span>4499元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/56e3379b5422cb06e5c8a0c546445606.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米11 青春版</p>
+                <span>2099元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/f9149ef3ba2c9025a4a21c98ae793808.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米10S</p>
+                <span>2999元起</span>
+              </div>
+              <div class="list-item-end">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/963679eaf3937351e154600ab3448460.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米11</p>
+                <span>3799元起</span>
+              </div>
+            </div>
+            <div class="list2 listed hide">
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e3c5d99c28700a3c45ea65eebbea0a04.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/88bb84ff06f0ab467b859aeed36b817a.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/acd0f27496ccdf81ef42124c35e8bfc4.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/d07671f25a2b3a6c3d4fac189f28fbe9.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ecebd50c7840bb03d7b5e3bfe4d439c2.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item-end">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/584add2c9cfdb9eefe7b642bf191773a.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+            </div>
+            <div class="list3 listed hide">
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/2626643d50f029c89f9dce1d6fc92273.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/c40ca118f075d39c5b7c2ee30cccddc4.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e513ac03d0ebb594bf42f7d6b1b44944.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/932b583c6eccd8aabfa0771f8a854940.jpg?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ea3390a20547c7298a258528e4aa69ad.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item-end">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/0112cb7e2ea8489fbd36ce3a781d5232.jpg?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+            </div>
+            <div class="list4 listed hide">
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/eaa9aaf2b53fff98ad651589fffc3e21.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/37fcbe3b823c837b6ffe7f59f7aa579e.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/789c69b743d9c46a39dd179cefdbce7c.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9ef482fe00cdcb7294e4029543ca9b9b.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9ef482fe00cdcb7294e4029543ca9b9b.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item-end">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/7872a4195d666f08bef0877562dd7fe7.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+            </div>
+            <div class="list5 listed hide">
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/b7a4e3ff7919ca2407ad970b78abd09a.jpg?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/65df9e92c06dcd148de5f0eb13e16ea2.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/11b8bca444aba2994fe852993eac9203.png?thumb=1&w=160&h=110"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/c82798dbbc793c8bd52929dbe86b316f.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/48d69ed4cc41d5c9d33bdeefd7f1da69.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item-end">
+                <img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/c5d772b7c2a159c3ed7d4e31bd293f18.jpg?thumb=1&w=160&h=110"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+            </div>
+            <div class="list6 listed hide">
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/2a759fa795d749f0538cfd2a15890027.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/2815a0a208be362cba673aae9a1f9c93.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/27da43294889d049a111e5ff2cdfafe7.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/359d3c63cc159949d8fe147a11b4bc40.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/aa1e0a4860cf40d34e1192d86691c82c.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item-end">
+                <img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/ec5be5f93ac0118aeec27b8df4337fc9.jpg?thumb=1&w=160&h=110"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+            </div>
+            <div class="list7 listed hide">
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/2b87ae4a36beef69bb2018eb1f8bce9b.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9c6a5f44fd12afa182367ed8d1716421.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f6e585a4bf5c0f744ca60f19ecd6fadf.jpg?thumb=1&w=160&h=110"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/17c0c91317ec0def3ecc072fa9480192.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+              <div class="list-item-end">
+                <img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/12cdacc6e4f343861d31345036cc3b46.png?thumb=1&w=160&h=110&f=webp&q=90"
+                  alt=""
+                />
+                <p>小米手机</p>
+                <span>2333元起</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section>
+      <div class="menu">
+        <div class="menu-list">
+          <div class="menu-list-wrap">
+            <a href="">
+              <div class="menu-list-item">
+                <span class="menu-item-text">手机 电话卡</span>
+                <div class="menu-item-Rarrow"></div>
+                <div class="hide item-detail item-detail-4-list">
+                  <div class="item-detail-list4">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                      <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list4">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                      <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                      </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list4">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                      <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list4">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                      <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a href="">
+              <div class="menu-list-item">
+                <span class="menu-item-text">电视 盒子</span>
+                <div class="menu-item-Rarrow"></div>
+                <div class="hide item-detail item-detail-4-list">
+                  <div class="item-detail-list4">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                      <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list4">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                      <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                      </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list4">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                      <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list4">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                      <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                  </div>
+                 
+                </div>
+              </div>
+            </a>
+            <a href="">
+              <div class="menu-list-item">
+                <span class="menu-item-text">笔记本 显示器</span>
+                <div class="menu-item-Rarrow"></div>
+                <div class="hide item-detail">
+                  <div class="item-detail-list3">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list3">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list3">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a href="">
+              <div class="menu-list-item">
+                <span class="menu-item-text">家电 插线板</span>
+                <div class="menu-item-Rarrow"></div>
+                <div class="hide item-detail item-detail-4-list">
+                  <div class="item-detail-list4">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                      <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list4">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                      <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                      </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list4">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                      <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list4">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                      <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                    <div class="detail-list-item">
+                        <img src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/96de94415b860f3de95b2d6294f0d0fd.png?thumb=1&w=40&h=40" alt="">
+                        <span>空调brabra</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a href="">
+              <div class="menu-list-item">
+                <span class="menu-item-text">出行 穿戴</span>
+                <div class="menu-item-Rarrow"></div>
+                <div class="hide item-detail">
+                  <div class="item-detail-list3">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list3">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list3">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a href="">
+              <div class="menu-list-item">
+                <span class="menu-item-text">智能 路由器</span>
+                <div class="menu-item-Rarrow"></div>
+                <div class="hide item-detail">
+                  <div class="item-detail-list3">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list3">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list3">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a href="">
+              <div class="menu-list-item">
+                <span class="menu-item-text">电源 配件</span>
+                <div class="menu-item-Rarrow"></div>
+                <div class="hide item-detail">
+                  <div class="item-detail-list3">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list3">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list3">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a href="">
+              <div class="menu-list-item">
+                <span class="menu-item-text">健康 儿童</span>
+                <div class="menu-item-Rarrow"></div>
+                <div class="hide item-detail">
+                  <div class="item-detail-list3">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list3">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list3">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a href="">
+              <div class="menu-list-item">
+                <span class="menu-item-text">耳机 音箱</span>
+                <div class="menu-item-Rarrow"></div>
+                <div class="hide item-detail">
+                  <div class="item-detail-list3">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list3">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list3">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a href="">
+              <div class="menu-list-item">
+                <span class="menu-item-text">生活 箱包</span>
+                <div class="menu-item-Rarrow"></div>
+                <div class="hide item-detail">
+                  <div class="item-detail-list3">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list3">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                  </div>
+                  <div class="item-detail-list3">
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                    <div class="detail-list-item">
+                      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/3e69fe4849e3e42bd4394e2be04a5c82.png?thumb=1&w=40&h=40&f=webp&q=90" alt="">
+                      <span>笔记本</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="menu-lbt">
+          <div class="lbt-box">
+            <img
+              src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e6e5ad482c9e0bc0aff2153bca94c0da.jpg?thumb=1&w=1226&h=460&f=webp&q=90"
+              alt=""
+            />
+            <img
+              src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/268aadece1368da98fcf5553b657cdb3.jpg?w=1226&h=460"
+              alt=""
+            />
+            <img
+              src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/1c3e97686468231f3f78048d7f2b7fdc.jpg?thumb=1&w=1226&h=460&f=webp&q=90"
+              alt=""
+            />
+            <img
+              src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/5e896d87c53a449509c14701673098bb.jpg?thumb=1&w=1226&h=460&f=webp&q=90"
+              alt=""
+            />
+            <img
+              src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/37de2b47154ae899cd31f4dcc291f1a2.jpg?thumb=1&w=1226&h=460&f=webp&q=90"
+              alt=""
+            />
+            <img
+              src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e6e5ad482c9e0bc0aff2153bca94c0da.jpg?thumb=1&w=1226&h=460&f=webp&q=90"
+              alt=""
+            />
+            <img
+              src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/268aadece1368da98fcf5553b657cdb3.jpg?w=1226&h=460"
+              alt=""
+            />
+          </div>
+          <div class="lbt-box-prev"></div>
+          <div class="lbt-box-next"></div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      (function () {
+        let cartWrap = document.querySelector(".cart-wrap");
+        let cartMenu = cartWrap.querySelector(".cartMenu");
+        let cartbox = cartMenu.querySelector(".cartbox");
+        let content = cartWrap.querySelector(".content");
+        let loading = content.querySelector(".loading");
+        let contentText = content.querySelector(".content-text");
+        let midNav = document.querySelector(".mid-nav");
+        let midNavItem1 = midNav.querySelector(".mid-nav-item1");
+        let midNavItem2 = midNav.querySelector(".mid-nav-item2");
+        let midNavItem3 = midNav.querySelector(".mid-nav-item3");
+        let midNavItem4 = midNav.querySelector(".mid-nav-item4");
+        let midNavItem5 = midNav.querySelector(".mid-nav-item5");
+        let midNavItem6 = midNav.querySelector(".mid-nav-item6");
+        let midNavItem7 = midNav.querySelector(".mid-nav-item7");
+        let underNavList = document.querySelector(".under-nav-list");
+        let list1 = underNavList.querySelector(".list1");
+        let list2 = underNavList.querySelector(".list2");
+        let list3 = underNavList.querySelector(".list3");
+        let list4 = underNavList.querySelector(".list4");
+        let list5 = underNavList.querySelector(".list5");
+        let list6 = underNavList.querySelector(".list6");
+        let list7 = underNavList.querySelector(".list7");
+        let lbt = document.querySelector(".lbt-box");
+        let lbtImg = lbt.querySelectorAll("img");
+        let menuWrap = document.querySelector(".menu-list-wrap")
+        let itemDetail = document.querySelectorAll(".item-detail")
+        // console.log(itemDeatil);
+        let timeout = null;
+        let num = 0;
+        let temp = 0;
+        let prev = 0;
+        let active = 1;
+        let next = 2;
+        let imgWidth = 1226;
+        let isHover = true;
+        let number = -1
+
+        // 侧边导航栏
+        menuWrap.addEventListener("mouseover",function(e){
+          // console.log(e.y);
+          // console.log(itemDetail[0].classList);
+          if(e.y >= 160 && e.y <= 201){
+            itemDetail[0].classList.remove("hide")
+            number = 0
+          }
+          if(e.y >= 202 && e.y <= 243){
+            itemDetail[1].classList.remove("hide")
+            number = 1
+          }
+          
+        })
+
+        menuWrap.addEventListener("mouseleave",function(e){
+          console.log(1);
+          itemDetail[number].classList.add("hide")
+        })
+
+
+
+
+        // 轮播图=======================================================
+        for (const i in lbtImg) {
+          if (i < lbtImg.length) {
+            // console.log(lbtImg[i].style);
+            lbtImg[i].style.transform = `translate3d(${
+              imgWidth * i * -1 + "px"
+            },0,0)`;
+            lbtImg[i].style.opacity = "0";
           }
         }
-      }
 
-      function goPrev(){
-        next = active
-        active = prev
-        prev = (prev - 1) % lbtImg.length
+        lbtImg[prev].style.opacity = "1";
+        lbtImg[active].style.opacity = "1";
+        lbtImg[next].style.opacity = "0";
 
-        lbtImg[prev].style.opacity = "1"
-          lbtImg[prev].style.transitionDuration = "0ms"
-          lbtImg[active].style.opacity = "1"
-          lbtImg[active].style.transitionDuration = "800ms"
-          lbtImg[next].style.opacity = "0"
-          lbtImg[next].style.transitionDuration = "0ms"
-      }
-
-      setInterval(() => {
-        if(isHover){
-          prev = active
-          active = next
-          next = (next + 1) % lbtImg.length
-
-          if(next === 0){
-            next = 2
+        function goNext() {
+          prev = active;
+          active = next;
+          next = (next + 1) % lbtImg.length;
+          if (next === 0) {
+            next = 2;
           }
-
-          if(prev === 6){
-            prev = 1
+          if (prev === 6) {
+            prev = 1;
           }
-
-          if(active === 2){
-            for (let j = next + 1; j  < lbtImg.length; j++) {
-              lbtImg[j].style.opacity = "0"            
+          if (active === 2) {
+            for (let j = next + 1; j < lbtImg.length; j++) {
+              lbtImg[j].style.opacity = "0";
             }
           }
-
-          lbtImg[prev].style.opacity = "1"
-          lbtImg[prev].style.transitionDuration = "0ms"
-          lbtImg[active].style.opacity = "1"
-          lbtImg[active].style.transitionDuration = "800ms"
-          lbtImg[next].style.opacity = "0"
-          lbtImg[next].style.transitionDuration = "0ms"
-
-        }        
-      }, 3000);
-
-
-      // 购物车
-      cartWrap.addEventListener("mouseover", function () {
-        content.style.height = "120px"
-        cartMenu.style.background = "#ffffff"
-        cartbox.style.color = "#ff6700"
-        if (timeout === null) {
-          timeout = setTimeout(() => {
-            loading.classList.value += ' hide'
-            contentText.classList.value = 'content-text'
-            timeout = null
-          }, 2000);
         }
-      })
-      cartWrap.addEventListener("mouseout", function () {
-        cartMenu.style.background = "rgb(92, 92, 92)"
-        cartbox.style.color = "#b0b0b0"
-        content.style.height = "0px"
-      })
 
-      // 顶部导栏
-      midNav.addEventListener("mouseover",function(e){
-        underNavList.style.height = "200px"
-        if(e.target.className === "mid-nav" ){
-          return
-        }
-        switch (num) {
-          case 1:
-            list1.className += " hide"
-            num = 0
-            break;
-          case 2:
-            list2.className += " hide"
-            num = 0
-            break;
-          case 3:
-            list3.className += " hide"
-            num = 0
-            break;
-          case 4:
-            list4.className += " hide"
-            num = 0
-            break;
-          case 5:
-            list5.className += " hide"
-            num = 0
-            break;
-          case 6:
-            list6.className += " hide"
-            num = 0
-            break;
-          case 7:
-            list7.className += " hide"
-            num = 0
-            break;
-          default:
-            break;
-        }
-        switch (e.target.className) {
-          case 'mid-nav-item1':
-            num = 1
-            list1.className = "list1 listed"
-            break;
-          case 'mid-nav-item2':
-            num = 2
-            list2.className = "list2 listed"
-            break;
-          case 'mid-nav-item3':
-            num = 3
-            list3.className = "list3 listed"
-            break;
-          case 'mid-nav-item4':
-            num = 4
-            list4.className = "list4 listed"
-            break;
-          case 'mid-nav-item5':
-            num = 5
-            list5.className = "list5 listed"
-            break;
-          case 'mid-nav-item6':
-            num = 6
-            list6.className = "list6 listed"
-            break;
-          case 'mid-nav-item7':
-            num = 7
-            list7.className = "list7 listed"
-            break;
-          default:
-            break;
-        }
-      })
-      midNav.addEventListener("mouseleave",function(e){
-        underNavList.style.height = "0px"
-      })
+        function goPrev() {
+          next = active;
+          active = prev;
+          prev = (prev - 1) % lbtImg.length;
 
-    })()
-  </script>
-</body>
+          lbtImg[prev].style.opacity = "1";
+          lbtImg[prev].style.transitionDuration = "0ms";
+          lbtImg[active].style.opacity = "1";
+          lbtImg[active].style.transitionDuration = "800ms";
+          lbtImg[next].style.opacity = "0";
+          lbtImg[next].style.transitionDuration = "0ms";
+        }
 
+        setInterval(() => {
+          if (isHover) {
+            prev = active;
+            active = next;
+            next = (next + 1) % lbtImg.length;
+
+            if (next === 0) {
+              next = 2;
+            }
+
+            if (prev === 6) {
+              prev = 1;
+            }
+
+            if (active === 2) {
+              for (let j = next + 1; j < lbtImg.length; j++) {
+                lbtImg[j].style.opacity = "0";
+              }
+            }
+
+            lbtImg[prev].style.opacity = "1";
+            lbtImg[prev].style.transitionDuration = "0ms";
+            lbtImg[active].style.opacity = "1";
+            lbtImg[active].style.transitionDuration = "800ms";
+            lbtImg[next].style.opacity = "0";
+            lbtImg[next].style.transitionDuration = "0ms";
+          }
+        }, 3000);
+
+        // 购物车===========================================================
+        cartWrap.addEventListener("mouseover", function () {
+          content.style.height = "120px";
+          cartMenu.style.background = "#ffffff";
+          cartbox.style.color = "#ff6700";
+          if (timeout === null) {
+            timeout = setTimeout(() => {
+              loading.classList.value += " hide";
+              contentText.classList.value = "content-text";
+              timeout = null;
+            }, 2000);
+          }
+        });
+        cartWrap.addEventListener("mouseout", function () {
+          cartMenu.style.background = "#424242";
+          cartbox.style.color = "#b0b0b0";
+          content.style.height = "0px";
+        });
+
+        // 顶部导栏======================================================
+        midNav.addEventListener("mousemove", function (e) {
+          underNavList.style.height = "200px";
+
+          switch (e.target.className) {
+            case "mid-nav-item1":
+              num = 1;
+              temp = 1;
+              list1.className = "list1 listed";
+              midNavItem1.className += " active";
+              break;
+            case "mid-nav-item2":
+              num = 2;
+              temp = 2;
+              list2.className = "list2 listed";
+              midNavItem2.className += " active";
+              break;
+            case "mid-nav-item3":
+              num = 3;
+              temp = 3;
+              list3.className = "list3 listed";
+              midNavItem3.className += " active";
+              break;
+            case "mid-nav-item4":
+              num = 4;
+              temp = 4;
+              list4.className = "list4 listed";
+              midNavItem4.className += " active";
+              break;
+            case "mid-nav-item5":
+              num = 5;
+              temp = 5;
+              list5.className = "list5 listed";
+              midNavItem5.className += " active";
+              break;
+            case "mid-nav-item6":
+              num = 6;
+              temp = 6;
+              list6.className = "list6 listed";
+              midNavItem6.className += " active";
+              break;
+            case "mid-nav-item7":
+              num = 7;
+              temp = 7;
+              list7.className = "list7 listed";
+              midNavItem7.className += " active";
+              break;
+            default:
+              break;
+          }
+        });
+
+        midNav.addEventListener("mouseout", function (e) {
+          switch (num) {
+            case 1:
+              list1.className += " hide";
+              midNavItem1.className = "mid-nav-item1";
+              num = 0;
+              break;
+            case 2:
+              list2.className += " hide";
+              midNavItem2.className = "mid-nav-item2";
+              num = 0;
+              break;
+            case 3:
+              list3.className += " hide";
+              midNavItem3.className = "mid-nav-item3";
+              num = 0;
+              break;
+            case 4:
+              list4.className += " hide";
+              midNavItem4.className = "mid-nav-item4";
+              num = 0;
+              break;
+            case 5:
+              list5.className += " hide";
+              midNavItem5.className = "mid-nav-item5";
+              num = 0;
+              break;
+            case 6:
+              list6.className += " hide";
+              midNavItem6.className = "mid-nav-item6";
+              num = 0;
+              break;
+            case 7:
+              list7.className += " hide";
+              midNavItem7.className = "mid-nav-item7";
+              num = 0;
+              break;
+            default:
+              break;
+          }
+        });
+
+        underNavList.addEventListener("mousemove", function (e) {
+          switch (temp) {
+            case 1:
+              list1.className = "list1 listed";
+              midNavItem1.className += " active";
+              break;
+
+            case 2:
+              list2.className = "list1 listed";
+              midNavItem2.className += " active";
+              break;
+
+            case 3:
+              list3.className = "list1 listed";
+              midNavItem3.className += " active";
+              break;
+
+            case 4:
+              list4.className = "list1 listed";
+              midNavItem4.className += " active";
+              break;
+
+            case 5:
+              list5.className = "list1 listed";
+              midNavItem5.className += " active";
+              break;
+
+            case 6:
+              list6.className = "list1 listed";
+              midNavItem6.className += " active";
+              break;
+
+            case 7:
+              list7.className = "list1 listed";
+              midNavItem7.className += " active";
+              break;
+
+            default:
+              break;
+          }
+        });
+        underNavList.addEventListener("mouseleave", function (e) {
+          console.log(1);
+          underNavList.style.height = "0px";
+          switch (temp) {
+            case 1:
+              list1.className += " hide";
+              midNavItem1.className = "mid-nav-item1";
+              temp = 0;
+              break;
+            case 2:
+              list2.className += " hide";
+              midNavItem2.className = "mid-nav-item2";
+              temp = 0;
+              break;
+            case 3:
+              list3.className += " hide";
+              midNavItem3.className = "mid-nav-item3";
+              temp = 0;
+              break;
+            case 4:
+              list4.className += " hide";
+              midNavItem4.className = "mid-nav-item4";
+              temp = 0;
+              break;
+            case 5:
+              list5.className += " hide";
+              midNavItem5.className = "mid-nav-item5";
+              temp = 0;
+              break;
+            case 6:
+              list6.className += " hide";
+              midNavItem6.className = "mid-nav-item6";
+              temp = 0;
+              break;
+            case 7:
+              list7.className += " hide";
+              midNavItem7.className = "mid-nav-item7";
+              temp = 0;
+              break;
+            default:
+              break;
+          }
+        });
+      })();
+    </script>
+  </body>
 </html>
