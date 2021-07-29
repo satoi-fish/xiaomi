@@ -430,6 +430,7 @@
     .lbt-box-prev:hover,
     .lbt-box-next:hover {
       background-color: rgba(0, 0, 0, 0.4);
+      cursor: pointer;
     }
 
     .lbt-box-prev {
@@ -2412,7 +2413,9 @@
       let midNav = document.querySelector(".mid-nav");
       let underNav = document.querySelector(".under-nav");
       let underNavList = document.querySelector(".under-nav-list")
-      let lbt = document.querySelector(".lbt-box");
+      let lbt = document.querySelector(".menu-lbt");
+      let lbtPrev = document.querySelector(".lbt-box-prev") 
+      let lbtNext = document.querySelector(".lbt-box-next")
       let lbtImg = lbt.querySelectorAll("img");
       let menuWrap = document.querySelector(".menu-list-wrap");
       let itemDetail = document.querySelectorAll(".item-detail");
@@ -2424,7 +2427,7 @@
       let active = 1;
       let next = 2;
       let imgWidth = 1226;
-      let isHover = true;
+      let isHover = false;
       let number = 9;
 
       // 侧边导航栏====================================================
@@ -2498,12 +2501,23 @@
           lbtImg[i].style.opacity = "0";
         }
       }
+      lbt.addEventListener("mouseover",function(){
+        isHover = true
+      })
+      lbt.addEventListener("mouseleave",function(){
+        isHover = false
+      })
 
       lbtImg[prev].style.opacity = "1";
       lbtImg[active].style.opacity = "1";
       lbtImg[next].style.opacity = "0";
 
+
+
       function goNext() {
+        lbtImg[active].style.zIndex = "0"
+        lbtImg[prev].style.opacity = "0"
+        lbtImg[next].style.opacity = "1"
         prev = active;
         active = next;
         next = (next + 1) % lbtImg.length;
@@ -2518,23 +2532,63 @@
             lbtImg[j].style.opacity = "0";
           }
         }
+        
+        lbtImg[prev].style.opacity = "1";
+        lbtImg[prev].style.transitionDuration = "0ms";
+        // lbtImg[prev].style.zIndex = "0";
+        lbtImg[active].style.opacity = "1";
+        lbtImg[active].style.transitionDuration = "800ms";
+        // lbtImg[active].style.zIndex = "1";
+        lbtImg[next].style.opacity = "0";
+        lbtImg[next].style.transitionDuration = "0ms";
+        // lbtImg[next].style.zIndex = "0";
       }
 
       function goPrev() {
+        lbtImg.forEach((e,index,arr)=>{
+          if(index !== prev && index !== active && index !== next){
+            e.style.zIndex = "0";
+          }
+        })
+        lbtImg[prev].style.opacity = "1"
+        lbtImg[next].style.opacity = "0"
         next = active;
         active = prev;
-        prev = (prev - 1) % lbtImg.length;
+        prev--
+        // if(active === 1){
+        //   active = 5
+        //   next = 6
+        // }
+        if(prev === -1){
+          prev = lbtImg.length - 3 
+          active = lbtImg.length - 2
+        }
+        if(active < lbtImg.length -2){
+          lbtImg[next + 1].style.opacity = "0";
+        }
 
-        lbtImg[prev].style.opacity = "1";
+        lbtImg[prev].style.opacity = "0";
         lbtImg[prev].style.transitionDuration = "0ms";
+        lbtImg[prev].style.zIndex = "0";
         lbtImg[active].style.opacity = "1";
         lbtImg[active].style.transitionDuration = "800ms";
-        lbtImg[next].style.opacity = "0";
+        lbtImg[active].style.zIndex = "1";
+        lbtImg[next].style.opacity = "1";
         lbtImg[next].style.transitionDuration = "0ms";
+        lbtImg[next].style.zIndex = "0";
       }
 
+      lbtPrev.addEventListener("click",goPrev)
+      lbtNext.addEventListener("click",goNext)
+
       setInterval(() => {
-        if (isHover) {
+        if (!isHover) {
+          lbtImg.forEach((e,index,arr)=>{
+          if(index !== prev && index !== active && index !== next){
+            e.style.zIndex = "0";
+            e.style.opacity = "0"
+          }
+        })
           prev = active;
           active = next;
           next = (next + 1) % lbtImg.length;
@@ -2820,7 +2874,6 @@
         underNavList.appendChild(underNavItem)
       }
       let underNavItem = document.getElementsByClassName("under-nav-item")
-      console.log(underNavItem);
 
       midNav.addEventListener("mouseover", function (e) {
         clearTimeout(timeout2)
